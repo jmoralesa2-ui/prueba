@@ -10,12 +10,12 @@ Necesito empezar a estudiar ya. Mis límites de uso se reinician cada 5 horas, y
 4. Todo se genera desde datos: los videos, los niveles y las preguntas se escriben como datos, y el motor los dibuja con piezas SVG reutilizables (sección 11). Nunca dibujes SVG a mano para cada escena.
 5. Escribe cada archivo completo de una vez y no lo vuelvas a leer después de escribirlo. Para cambiar algo, edita solo la parte necesaria.
 6. Verifica con scripts, no con capturas: un validador de los datos y una revisión de errores de consola con un navegador sin ventana. Usa como máximo 2 capturas de pantalla por etapa.
-7. No uses subagentes ni tareas en paralelo, y no instales frameworks ni dependencias.
+7. No uses subagentes ni tareas en paralelo, y no instales frameworks ni dependencias. La única excepción es Kokoro, y solo para generar las voces (sección 11).
 8. Respuestas cortas: no me expliques el código ni repitas lo que hiciste. Al final de cada etapa, un resumen de 5 líneas como máximo y qué puedo usar ya.
 
 ## 0. Qué hay en la carpeta
 - PROMPT.md: este archivo.
-- base/: mi HTML actual (la referencia de pestañas, funciones, colores y recursos) y el archivo "Solemne de Biofísica" (la referencia del estilo de las explicaciones animadas, los "videos": ese es el estilo que quiero, pero todavía mejor). Puede haber también una imagen conceptual del juego; úsala solo como referencia de estilo visual.
+- base/: mi HTML actual (la referencia de pestañas, funciones, colores y recursos) y el archivo "Solemne de Biofísica" (la referencia del estilo de las explicaciones animadas, los "videos": ese es el estilo que quiero, pero todavía mejor). Puede haber también una imagen conceptual del juego; úsala solo como referencia de estilo visual. La app de Solemne de Biofísica narra sus explicaciones con voces generadas con Kokoro (un modelo de voz gratuito que corre en el computador). Para analizarla basta con su HTML: no necesitas escuchar ni abrir los audios (sección 2). Si en base/ hay un script con el que se generaron esas voces, úsalo como referencia de la configuración.
 - contenido/CONTENIDO.md: índice de los apuntes, formato de los archivos y datos que aparecen solo en las figuras. Léelo primero.
 - contenido/A_Oxidacion_acidos_grasos_cuerpos_cetonicos.md: Apunte A, "Oxidación de ácidos grasos y cuerpos cetónicos" (24 secciones, 34 figuras).
 - contenido/B_Biosintesis_AG_eicosanoides_colesterol.md: Apunte B, "Biosíntesis y almacenamiento de ácidos grasos, eicosanoides y colesterol" (24 secciones, 48 figuras).
@@ -34,8 +34,10 @@ Analiza el HTML base y hazme uno como ese, pero con la información de los dos a
 Si aprender y jugar chocan, gana aprender, pero busca la forma de que siga sintiéndose juego.
 
 ## 2. Antes de programar (al inicio de la etapa 1)
+Cómo leer los archivos de base/ sin gastar de más: antes de abrir un HTML, revisa su tamaño. Si tiene audio o imágenes incrustados (data:audio, data:image, base64), no lo leas directo: con un script, haz una copia temporal sin esos datos, reemplazando cada uno por un marcador como [AUDIO 12, 45 KB], y lee esa copia. No abras ni escuches archivos de audio.
+
 1. Inventario del HTML base: todas las pestañas, funciones, botones, recursos, paleta de colores exacta (con códigos), tipografías, sonidos, animaciones, sistema de guardado y cualquier otro detalle. Guárdalo en INVENTARIO.md. Después no vuelvas a leer el HTML base completo: consulta INVENTARIO.md y abre solo la parte que necesites.
-2. Análisis de los videos de "Solemne de Biofísica": cómo están construidos, su ritmo, sus transiciones, sus controles y cómo presentan cada paso. Anótalo en INVENTARIO.md. Ese es el estándar mínimo para todas las explicaciones nuevas.
+2. Análisis de los videos de "Solemne de Biofísica": cómo están construidos, su ritmo, sus transiciones, sus controles y cómo presentan cada paso. Anota también cómo usa las voces: qué voz y configuración de Kokoro usa (si se puede saber), en qué momentos suena cada audio, cómo se sincroniza con la animación y qué controles tiene (silenciar, velocidad). Guarda todo en INVENTARIO.md. Ese es el estándar mínimo para todas las explicaciones nuevas.
 3. Lee contenido/CONTENIDO.md. Arma COBERTURA.md (sección 10) a partir del índice y de los títulos, tablas, figuras y recuadros de los apuntes, buscándolos: para esto no necesitas leer todo el texto. Cada etapa completa las filas de lo que construye.
 
 No esperes mi confirmación: haz esto y sigue directo con la etapa 1.
@@ -55,6 +57,7 @@ No esperes mi confirmación: haz esto y sigue directo con la etapa 1.
 - Moléculas precisas: cadenas con los carbonos numerados (C1 del carboxilo, α, β, ω), dobles enlaces cis o trans en su posición real (Δ2, Δ3, Δ9, Δ12...), los anillos A-B-C-D del colesterol y el enlace tioéster con la CoA.
 - Mascota guía: "Mito", una mitocondria sarcástica (con forma de frijol, color naranja-rosado y crestas en zigzag) que narra las explicaciones y reacciona a los aciertos y errores.
 - Que se sienta juego: cada ATP producido suena y salta como una moneda. Contadores animados, combos, partículas, temblor de pantalla en errores graves, transiciones suaves y sonido que cambia según el estado (alimentado, ayuno, ejercicio).
+- Voz: como en Solemne de Biofísica, cada paso de los videos y los momentos importantes del juego (jefes, logros, errores graves) tienen voz generada con Kokoro. Mito narra con su propia voz; si Solemne usa voces distintas según la situación, haz lo mismo. Debe haber un botón para silenciar la voz, aparte del de los efectos.
 - Si tienes disponible la skill frontend-design, úsala.
 
 ## 5. Mapa unificado = mapa del mundo (la pieza más importante)
@@ -449,13 +452,14 @@ Los capítulos mínimos son los siguientes. Cada uno debe cubrir todo lo que se 
 - Estructura sugerida: index.html; css/; js/motor/ (navegación, guardado, reproductor de videos, motor de preguntas, repaso, mapa y mecánicas); js/piezas/ (biblioteca SVG); datos/A/ y datos/B/ (un archivo por capítulo); datos/metabolitos.js; herramientas/ (validador y script de unión).
 - Biblioteca de piezas SVG reutilizables, animables con parámetros: cadena de carbonos (cualquier largo, dobles enlaces cis o trans en cualquier posición, numeración C1, α, β y ω); CoA y enlace tioéster; enzima-personaje (nombre, color, expresión); coenzimas (ATP, NADH, FADH2, NADPH, GTP); membranas simple y doble; transportadores y lanzaderas; flechas y signos de activación e inhibición; anillos del colesterol; gota de grasa; células y órganos; y Mito.
 - Los videos se escriben como datos: una lista de pasos, y cada paso dice qué piezas aparecen, qué se mueve o transforma, qué dice Mito y qué se resalta. Un reproductor genérico los dibuja y los anima.
+- Voces: el texto que dice Mito en cada paso vive en los datos. Un script, herramientas/generar_voces.py, genera con Kokoro un audio comprimido por línea (en audio/, con nombres que siguen los ID del capítulo y del paso) y guarda una huella del texto, para regenerar solo las líneas que cambien. El juego reproduce cada audio sincronizado con su paso; si falta un audio, usa la voz del navegador (Web Speech API) en español. Kokoro se usa solo en ese script, nunca dentro del juego. Si Kokoro no se puede instalar en este computador, no insistas: usa la voz del navegador y avísame.
 - Las mecánicas de la sección 7 son motores genéricos, y cada nivel es un archivo de datos chico.
 - Las preguntas son datos con id, capítulo, formato, enunciado, respuesta y justificación.
 - Un diccionario único de metabolitos con ID compartidos (acetil-CoA, malonil-CoA, citrato, HMG-CoA...), para que un apunte nuevo se conecte solo al mapa unificado.
 - El motor genera todo a partir de los datos: menús, videos, niveles, colecciones, mapa y exámenes. Agregar un apunte tiene que ser agregar sus archivos de datos, sin tocar el motor.
 - Guardado con versión, para que agregar temas no borre el progreso.
 - Validador (en Node o Python, lo que esté instalado, sin dependencias): revisa que cada capítulo tenga todas sus partes, que cada ID exista, que cada pregunta tenga respuesta y justificación, y que COBERTURA.md no tenga filas vacías en lo ya construido.
-- Script de unión: junta todo en un solo archivo, HOMEOSTASIS.html, con las fotos incrustadas, para abrirlo en el celular o compartirlo.
+- Script de unión: junta todo en un solo archivo, HOMEOSTASIS.html, con las fotos incrustadas, para abrirlo en el celular o compartirlo. Si las voces caben sin que el archivo pase de unos 40 MB, inclúyelas; si no, el archivo único usa la voz del navegador, y la versión con las voces de Kokoro es la carpeta completa (index.html con audio/).
 - COMO_AGREGAR_APUNTES.md: cómo pasar un apunte nuevo con herramientas/convertir_apunte.py, cómo describir sus figuras y cómo crear sus archivos de datos, con una plantilla vacía y un ejemplo.
 
 ## 12. Las 3 etapas
@@ -466,6 +470,7 @@ Al terminar cada etapa: corre el validador, revisa que no haya errores de consol
 - El motor de estudio completo: todas las pestañas y funciones del HTML base, estilo visual, guardado, biblioteca de piezas SVG, reproductor de videos, motor de preguntas (verdadero/falso con justificación, selección múltiple, ordenar, arrastrar y completar), Detector de Mentiras, repaso espaciado y Modo Examen (Control y Solemne).
 - El Acto I completo en el Modo Historia (I-1 a I-24): cada capítulo con su video, la práctica dentro del video, los recuadros como objetos del juego, su Modo Exprés y su banco de preguntas. Por ahora, el paso "nivel jugable" es un desafío de preguntas con tiempo y vidas, que hace de mini-jefe.
 - El mapa unificado en su primera versión: el tramo del Acto I navegable, con niebla de guerra e interruptor hormonal.
+- Las voces de todos los videos del Acto I, generadas en un solo lote al final de la etapa (no capítulo por capítulo).
 - HOMEOSTASIS.html listo para usar.
 - Punto de control: cuando el motor esté listo y el capítulo I-1 esté completo (video, práctica, recuadros, Modo Exprés y preguntas), detente y avísame para que cambie de modelo. El capítulo I-1 es el modelo de calidad: todos los capítulos siguientes (en esta etapa y en la 2) siguen su misma estructura y nivel de detalle.
 
@@ -473,12 +478,14 @@ Al terminar cada etapa: corre el validador, revisa que no haya errores de consol
 - El Acto II completo en el Modo Historia (II-1 a II-26), con la misma estructura.
 - El mapa unificado completo: los dos actos conectados, las capas, los estados hormonales con las enzimas reguladas y el mapa de calor de dominio.
 - La Enzimodex y las demás colecciones (Arsenal, Bestiario, Grimorio, Gemas y Pergaminos), generadas desde los datos.
+- Las voces del Acto II, en un solo lote al final de la etapa.
 - HOMEOSTASIS.html actualizado.
 
 ### Etapa 3: "El juego completo"
 - Las mecánicas de la sección 7 como motores genéricos, con un nivel para cada capítulo, en reemplazo de los desafíos de preguntas provisionales.
 - Punto de control: cuando los motores de las mecánicas estén listos y haya un nivel terminado de cada una, detente y avísame para que cambie de modelo. Esos niveles son el modelo de calidad para los demás.
 - Los mini-jefes y jefes de la sección 8, la progresión (XP, rangos, logros y racha), el sonido y los efectos.
+- Las voces de los jefes y de los momentos del juego, en un solo lote.
 - COMO_AGREGAR_APUNTES.md.
 - Verificación final:
   - el validador pasa;

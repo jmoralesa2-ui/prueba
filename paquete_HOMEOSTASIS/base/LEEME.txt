@@ -1,6 +1,7 @@
 Pon en esta carpeta:
 1. Tu HTML base (la app actual).
-2. El archivo "Solemne de Biofísica".
-3. (Opcional) La imagen conceptual del juego.
+2. El HTML de "Solemne de Biofísica". Basta con el HTML: no hace falta copiar los audios de las voces.
+3. (Opcional) El script con que se generaron las voces con Kokoro, si lo tienes.
+4. (Opcional) La imagen conceptual del juego.
 
 No pongas los PDF ni los Word de los apuntes: ya están convertidos en la carpeta contenido.
