@@ -1,0 +1,6 @@
+Pon en esta carpeta:
+1. Tu HTML base (la app actual).
+2. El archivo "Solemne de Biofísica".
+3. (Opcional) La imagen conceptual del juego.
+
+No pongas los PDF ni los Word de los apuntes: ya están convertidos en la carpeta contenido.

@@ -1,24 +1,31 @@
 # HOMEOSTASIS: juego para aprender Bioquímica (módulo Lípidos)
 
-## Reglas para ahorrar uso (aplícalas durante todo el proyecto)
-1. Al empezar, guarda este prompt completo como PROMPT.md en el proyecto, y crea un CLAUDE.md corto (máximo 40 líneas) con estas reglas y un resumen del proyecto: qué es, qué archivos hay y en qué etapa vamos. No copies el prompt en CLAUDE.md: en cada sesión nueva, abre solo la sección de PROMPT.md que necesites para la etapa.
-2. Haz una etapa por sesión (sección 12). Al terminar cada una, actualiza PROGRESO.md y detente para que yo limpie la conversación.
-3. Lee los PDF una sola vez y pasa su contenido a CONTENIDO.md. Después trabaja solo con ese archivo.
-4. Para cambiar algo, edita solo la parte necesaria. No reescribas un archivo completo salvo que sea nuevo.
-5. No leas archivos largos completos: busca lo que necesitas y abre solo esa parte.
-6. No uses subagentes ni tareas en paralelo.
-7. Usa como máximo 2 capturas de pantalla por etapa. Para el resto, revisa los errores de consola y usa pruebas automáticas.
-8. Respuestas cortas: no me expliques el código ni repitas lo que hiciste. Al final de cada etapa, un resumen de 5 líneas como máximo.
+Este archivo es PROMPT.md y está en la carpeta del proyecto. Léelo completo en la primera sesión; en las siguientes, abre solo la sección que necesites.
 
-## 0. Archivos que te adjunto
-1. HTML base: [NOMBRE DEL ARCHIVO]. Es mi app actual y la referencia de pestañas, funciones, colores y recursos.
-2. "Solemne de Biofísica": [NOMBRE DEL ARCHIVO]. Es la referencia del estilo de las explicaciones animadas (los "videos"). Ese es el estilo que quiero, pero todavía mejor.
-3. Apunte A: "Oxidación de ácidos grasos y cuerpos cetónicos" (PDF, 24 secciones).
-4. Apunte B: "Biosíntesis y almacenamiento de ácidos grasos, eicosanoides y colesterol" (PDF, 24 secciones).
-5. (Opcional) Imagen conceptual del juego. Úsala solo como referencia de estilo visual.
+## Reglas para trabajar rápido y ahorrar uso (aplícalas siempre)
+Necesito empezar a estudiar ya. Mis límites de uso se reinician cada 5 horas, y la meta es que todo el proyecto quepa en unos 3 de esos límites. Trabaja lo más rápido, ahorrativo y eficiente posible, sin perder calidad.
+1. El trabajo está dividido en 3 etapas (sección 12), y cada una termina con una versión que ya puedo usar para estudiar. Las etapas no van amarradas a los límites de uso: cuando termines una, detente para que yo limpie la conversación con /clear, y sigue de inmediato con la siguiente.
+2. Al empezar, crea un CLAUDE.md corto (máximo 40 líneas) con estas reglas, la estructura de carpetas y la etapa en que vamos. Actualiza PROGRESO.md (qué está hecho, qué falta y qué decisiones tomaste) cada vez que termines un capítulo o un bloque de trabajo, para que, si se acaba el límite de uso a mitad de una etapa, se pueda retomar exactamente donde quedó.
+3. El contenido de los apuntes ya está listo en contenido/ (sección 0). No hay PDF. No leas los archivos de contenido completos de una vez: busca el título de la sección que necesitas y abre solo esa parte.
+4. Todo se genera desde datos: los videos, los niveles y las preguntas se escriben como datos, y el motor los dibuja con piezas SVG reutilizables (sección 11). Nunca dibujes SVG a mano para cada escena.
+5. Escribe cada archivo completo de una vez y no lo vuelvas a leer después de escribirlo. Para cambiar algo, edita solo la parte necesaria.
+6. Verifica con scripts, no con capturas: un validador de los datos y una revisión de errores de consola con un navegador sin ventana. Usa como máximo 2 capturas de pantalla por etapa.
+7. No uses subagentes ni tareas en paralelo, y no instales frameworks ni dependencias.
+8. Respuestas cortas: no me expliques el código ni repitas lo que hiciste. Al final de cada etapa, un resumen de 5 líneas como máximo y qué puedo usar ya.
+
+## 0. Qué hay en la carpeta
+- PROMPT.md: este archivo.
+- base/: mi HTML actual (la referencia de pestañas, funciones, colores y recursos) y el archivo "Solemne de Biofísica" (la referencia del estilo de las explicaciones animadas, los "videos": ese es el estilo que quiero, pero todavía mejor). Puede haber también una imagen conceptual del juego; úsala solo como referencia de estilo visual.
+- contenido/CONTENIDO.md: índice de los apuntes, formato de los archivos y datos que aparecen solo en las figuras. Léelo primero.
+- contenido/A_Oxidacion_acidos_grasos_cuerpos_cetonicos.md: Apunte A, "Oxidación de ácidos grasos y cuerpos cetónicos" (24 secciones, 34 figuras).
+- contenido/B_Biosintesis_AG_eicosanoides_colesterol.md: Apunte B, "Biosíntesis y almacenamiento de ácidos grasos, eicosanoides y colesterol" (24 secciones, 48 figuras).
+  Los dos tienen el texto completo, las tablas, los recuadros (Clave, Ojo, Clínica, Mnemotecnia, Diferencia y Síntesis) y cada figura descrita en detalle donde aparece.
+- figuras/fotos/: las 6 fotos reales que sí van en el juego.
+- figuras/esquemas/: los demás esquemas, solo como referencia (ver CONTENIDO.md).
+- herramientas/convertir_apunte.py: script para pasar apuntes nuevos en Word al mismo formato.
 
 ## 1. Objetivo y prioridades
-Analiza el HTML base y hazme uno como ese, pero con la información de estos dos apuntes y convertido en un videojuego muy bien diseñado llamado HOMEOSTASIS. Mis prioridades, de mayor a menor:
+Analiza el HTML base y hazme uno como ese, pero con la información de los dos apuntes y convertido en un videojuego muy bien diseñado llamado HOMEOSTASIS. Mis prioridades, de mayor a menor:
 1. Aprender TODO el contenido de los dos apuntes, sin omitir ningún detalle, en el menor tiempo posible.
 2. Que se sienta un videojuego de verdad, no una página de estudio con puntos.
 3. Conservar todo lo que tiene el HTML base.
@@ -26,20 +33,12 @@ Analiza el HTML base y hazme uno como ese, pero con la información de estos dos
 
 Si aprender y jugar chocan, gana aprender, pero busca la forma de que siga sintiéndose juego.
 
-## 2. Antes de programar (obligatorio)
-1. Inventario del HTML base: todas las pestañas, funciones, botones, recursos, paleta de colores exacta (con códigos), tipografías, sonidos, animaciones, sistema de guardado y cualquier otro detalle. Guárdalo en INVENTARIO.md. Después de eso, no vuelvas a leer el HTML base completo: consulta INVENTARIO.md y abre solo la parte que necesites.
-2. Análisis de los videos de "Solemne de Biofísica": cómo están construidos (SVG, canvas, CSS o JS), su ritmo, sus transiciones, sus controles y cómo presentan cada paso. Anótalo en INVENTARIO.md. Ese es el estándar mínimo para todas las explicaciones nuevas.
-3. Pasa los dos apuntes a CONTENIDO.md una sola vez, sin omitir nada (texto, tablas, figuras y los recuadros Clave, Ojo, Clínica, Mnemotecnia, Diferencia y Síntesis):
-   - extrae el texto con una herramienta (pdftotext o PyMuPDF) en vez de leer las páginas como imagen. Los apuntes están a dos columnas: revisa que el texto no quede mezclado y que las tablas queden completas;
-   - extrae las figuras a la carpeta figuras/, con nombres como A-fig01.png o B-fig27.png;
-   - mira cada figura una sola vez y escribe en CONTENIDO.md, junto a su sección, una descripción detallada: moléculas, enzimas, flechas, signos de activación e inhibición, números y anotaciones a mano. Hay datos que están solo en las figuras, así que esa descripción es obligatoria;
-   - marca qué figuras son fotos reales (histología, micrografías, animales, estructuras 3D) y cuáles son esquemas;
-   - si te paso los apuntes en Word (.docx) además del PDF, usa el Word: trae el texto, las tablas y las imágenes ya separados.
+## 2. Antes de programar (al inicio de la etapa 1)
+1. Inventario del HTML base: todas las pestañas, funciones, botones, recursos, paleta de colores exacta (con códigos), tipografías, sonidos, animaciones, sistema de guardado y cualquier otro detalle. Guárdalo en INVENTARIO.md. Después no vuelvas a leer el HTML base completo: consulta INVENTARIO.md y abre solo la parte que necesites.
+2. Análisis de los videos de "Solemne de Biofísica": cómo están construidos, su ritmo, sus transiciones, sus controles y cómo presentan cada paso. Anótalo en INVENTARIO.md. Ese es el estándar mínimo para todas las explicaciones nuevas.
+3. Lee contenido/CONTENIDO.md. Arma COBERTURA.md (sección 10) a partir del índice y de los títulos, tablas, figuras y recuadros de los apuntes, buscándolos: para esto no necesitas leer todo el texto. Cada etapa completa las filas de lo que construye.
 
-   Desde ahí en adelante trabaja con CONTENIDO.md y no vuelvas a abrir los PDF.
-4. Arma la matriz de cobertura (sección 10) antes de crear contenido.
-
-No esperes mi confirmación para empezar: esto es la etapa 1 de la sección 12.
+No esperes mi confirmación: haz esto y sigue directo con la etapa 1.
 
 ## 3. Reglas que no se negocian
 - Nada del HTML base se pierde. Las pestañas y funciones pueden cambiar de nombre o de lugar para encajar en el juego, pero todas siguen existiendo y funcionando. Al final, entrega una tabla "pestaña o función original → dónde quedó".
@@ -48,7 +47,7 @@ No esperes mi confirmación para empezar: esto es la etapa 1 de la sección 12.
 - La bioquímica es la mecánica: cada nivel exige saber algo del apunte para ganar. Está prohibido el "responde esta pregunta para desbloquear".
 - Los valores del apunte mandan: 2,5 ATP por NADH, 1,5 por FADH2, 10 ATP por acetil-CoA, y el palmitato rinde 108 ATP brutos y 106 netos. Cuando el apunte corrige una diapositiva (recuadros "Ojo"), usa la versión corregida y enséñala como trampa de examen.
 - Tiene que funcionar abriendo el archivo en el navegador, en celular y en PC, sin instalar nada y sin internet (las fuentes web son opcionales y deben tener respaldo).
-- Durante el desarrollo, trabaja con varios archivos chicos (motor, estilos y un archivo de datos por capítulo) para poder editar solo lo necesario. Al final, júntalos con un script en un solo HTML (o en el mismo formato del HTML base), para que se abra igual que antes.
+- La tecnología y la forma de los archivos están en la sección 11.
 
 ## 4. Dirección de arte (2D, nada de 3D)
 - Todo se dibuja en código con SVG (canvas solo para partículas si hace falta). Estilo plano, contornos gruesos, colores saturados y personajes redondos con ojos grandes, al estilo de Kurzgesagt y Cells at Work. Sin 3D, sin WebGL y sin imágenes de internet: las únicas imágenes son las fotos reales de los apuntes (sección 10).
@@ -84,7 +83,7 @@ Una campaña en dos actos, uno por apunte, con los capítulos en el orden lógic
    - Mnemotecnia → Hechizo: se guarda en el Grimorio.
    - Diferencia → Duelo: minijuego de comparar dos cosas parecidas.
    - Síntesis → Pergamino con el resumen del capítulo.
-4. Nivel jugable del capítulo, con una de las mecánicas de la sección 7.
+4. Nivel jugable del capítulo, con una de las mecánicas de la sección 7. En las etapas 1 y 2 es un desafío de preguntas provisional (sección 12).
 5. Mini-jefe que da de 1 a 3 estrellas según la precisión. Al ganarlo se revela ese tramo del mapa y se desbloquean sus cartas.
 
 Además, cada capítulo tiene un "Modo Exprés" (un resumen animado de 2 a 3 minutos para repasar rápido) y muestra su tiempo estimado.
@@ -443,35 +442,48 @@ Los capítulos mínimos son los siguientes. Cada uno debe cubrir todo lo que se 
 ## 10. Matriz de cobertura (control de que no falte nada)
 - COBERTURA.md tiene una fila por cada sección y subsección de los dos apuntes (A 1.1 a A 24, B 1.1 a B 24), por cada tabla, por cada figura y por cada recuadro. Columnas: ítem, capítulo, paso del video, mecánica o nivel, y preguntas (con sus ID). Ninguna fila puede quedar vacía.
 - Banco de preguntas: por cada ítem de la matriz, al menos una verdadero/falso con justificación y una de otro formato (selección múltiple, ordenar, arrastrar o completar). También preguntas inversas (dado el efecto, encontrar la causa) y de cálculo donde aplique.
-- Los esquemas de los apuntes se redibujan como esquemas o animaciones SVG propias, a partir de su descripción en CONTENIDO.md. Las fotos reales (histología, micrografías, animales, estructuras 3D) se muestran desde figuras/, comprimidas, con un botón "ver figura original". Cada figura aparece en su capítulo.
+- Los esquemas de los apuntes se redibujan como esquemas o animaciones SVG propias, a partir de su descripción en contenido/. Las 6 fotos de figuras/fotos/ se muestran tal cual, con un botón "ver figura original". Cada figura aparece en su capítulo.
 
-## 11. Código preparado para más apuntes
-- Separa el motor del contenido. El contenido va en archivos de datos separados del motor (un archivo por capítulo), agrupados por apunte. Cada apunte tiene: id, título, acto, color, capítulos (pasos del video, prácticas, recuadros, nivel y jefe), enzimas, moléculas, fármacos, enfermedades, preguntas, y nodos y conexiones del mapa (con compartimento, tejido y estado hormonal).
+## 11. Tecnología y código preparado para más apuntes
+- HTML, CSS y JavaScript, sin frameworks y sin instalar nada, repartidos en varios archivos chicos para poder editar solo lo necesario. Usa scripts clásicos (no módulos ES), para que index.html se abra con doble clic, sin servidor.
+- Estructura sugerida: index.html; css/; js/motor/ (navegación, guardado, reproductor de videos, motor de preguntas, repaso, mapa y mecánicas); js/piezas/ (biblioteca SVG); datos/A/ y datos/B/ (un archivo por capítulo); datos/metabolitos.js; herramientas/ (validador y script de unión).
+- Biblioteca de piezas SVG reutilizables, animables con parámetros: cadena de carbonos (cualquier largo, dobles enlaces cis o trans en cualquier posición, numeración C1, α, β y ω); CoA y enlace tioéster; enzima-personaje (nombre, color, expresión); coenzimas (ATP, NADH, FADH2, NADPH, GTP); membranas simple y doble; transportadores y lanzaderas; flechas y signos de activación e inhibición; anillos del colesterol; gota de grasa; células y órganos; y Mito.
+- Los videos se escriben como datos: una lista de pasos, y cada paso dice qué piezas aparecen, qué se mueve o transforma, qué dice Mito y qué se resalta. Un reproductor genérico los dibuja y los anima.
+- Las mecánicas de la sección 7 son motores genéricos, y cada nivel es un archivo de datos chico.
+- Las preguntas son datos con id, capítulo, formato, enunciado, respuesta y justificación.
 - Un diccionario único de metabolitos con ID compartidos (acetil-CoA, malonil-CoA, citrato, HMG-CoA...), para que un apunte nuevo se conecte solo al mapa unificado.
-- El motor genera todo a partir de los datos: menús, videos, niveles, colecciones, mapa y exámenes. Agregar un apunte tiene que ser agregar un objeto, sin tocar el motor.
+- El motor genera todo a partir de los datos: menús, videos, niveles, colecciones, mapa y exámenes. Agregar un apunte tiene que ser agregar sus archivos de datos, sin tocar el motor.
 - Guardado con versión, para que agregar temas no borre el progreso.
-- COMO_AGREGAR_APUNTES.md con la plantilla vacía y un ejemplo.
+- Validador (en Node o Python, lo que esté instalado, sin dependencias): revisa que cada capítulo tenga todas sus partes, que cada ID exista, que cada pregunta tenga respuesta y justificación, y que COBERTURA.md no tenga filas vacías en lo ya construido.
+- Script de unión: junta todo en un solo archivo, HOMEOSTASIS.html, con las fotos incrustadas, para abrirlo en el celular o compartirlo.
+- COMO_AGREGAR_APUNTES.md: cómo pasar un apunte nuevo con herramientas/convertir_apunte.py, cómo describir sus figuras y cómo crear sus archivos de datos, con una plantilla vacía y un ejemplo.
 
-## 12. Forma de trabajo y verificación
-- Trabaja en etapas, una por sesión:
-  1. inventario, CONTENIDO.md y matriz de cobertura;
-  2. motor, estilo visual y mapa unificado;
-  3. Acto I completo;
-  4. Acto II completo;
-  5. mecánicas transversales, jefes, colecciones y exámenes;
-  6. verificación final y unión de los archivos en el HTML final.
+## 12. Las 3 etapas
+Al terminar cada etapa: corre el validador, revisa que no haya errores de consola, construye HOMEOSTASIS.html, actualiza PROGRESO.md y COBERTURA.md, y detente para que yo limpie la conversación con /clear. La sesión siguiente empieza leyendo CLAUDE.md y PROGRESO.md, no todo el proyecto.
 
-  Si una etapa es muy grande, divídela en partes (por ejemplo, Acto I capítulos 1 a 12 y 13 a 24). Al terminar cada etapa o parte: verifícala, actualiza PROGRESO.md (qué está hecho, qué falta y qué decisiones se tomaron) y detente para que yo limpie la conversación con /clear. Cada sesión nueva empieza leyendo CLAUDE.md y PROGRESO.md, no todo el proyecto.
+### Etapa 1: "Ya puedo estudiar el Acto I"
+- La sección 2 (inventario, análisis de los videos y COBERTURA.md), CLAUDE.md y PROGRESO.md.
+- El motor de estudio completo: todas las pestañas y funciones del HTML base, estilo visual, guardado, biblioteca de piezas SVG, reproductor de videos, motor de preguntas (verdadero/falso con justificación, selección múltiple, ordenar, arrastrar y completar), Detector de Mentiras, repaso espaciado y Modo Examen (Control y Solemne).
+- El Acto I completo en el Modo Historia (I-1 a I-24): cada capítulo con su video, la práctica dentro del video, los recuadros como objetos del juego, su Modo Exprés y su banco de preguntas. Por ahora, el paso "nivel jugable" es un desafío de preguntas con tiempo y vidas, que hace de mini-jefe.
+- El mapa unificado en su primera versión: el tramo del Acto I navegable, con niebla de guerra e interruptor hormonal.
+- HOMEOSTASIS.html listo para usar.
+
+### Etapa 2: "Ya puedo estudiar todo"
+- El Acto II completo en el Modo Historia (II-1 a II-26), con la misma estructura.
+- El mapa unificado completo: los dos actos conectados, las capas, los estados hormonales con las enzimas reguladas y el mapa de calor de dominio.
+- La Enzimodex y las demás colecciones (Arsenal, Bestiario, Grimorio, Gemas y Pergaminos), generadas desde los datos.
+- HOMEOSTASIS.html actualizado.
+
+### Etapa 3: "El juego completo"
+- Las mecánicas de la sección 7 como motores genéricos, con un nivel para cada capítulo, en reemplazo de los desafíos de preguntas provisionales.
+- Los mini-jefes y jefes de la sección 8, la progresión (XP, rangos, logros y racha), el sonido y los efectos.
+- COMO_AGREGAR_APUNTES.md.
 - Verificación final:
-  - abre el juego en el navegador (con Playwright si está disponible) en tamaño celular y en tamaño PC;
-  - no puede haber errores en la consola;
-  - cada video se reproduce hasta el final;
+  - el validador pasa;
+  - no hay errores de consola en tamaño celular ni en tamaño PC;
+  - cada video llega al final;
   - cada nivel se puede ganar y perder;
   - cada pestaña del HTML base funciona;
   - todos los números están recalculados;
-  - la matriz no tiene filas vacías.
-- Entrega:
-  - los archivos del juego, el script que los une y el HTML final;
-  - CLAUDE.md, PROGRESO.md, INVENTARIO.md, CONTENIDO.md, COBERTURA.md y COMO_AGREGAR_APUNTES.md;
-  - la tabla de conservación de pestañas;
-  - un resumen de lo que hiciste y, si algo no se pudo hacer, qué quedó pendiente y por qué.
+  - COBERTURA.md no tiene filas vacías.
+- Entrega final: HOMEOSTASIS.html, la tabla "pestaña o función original → dónde quedó" y un resumen de lo que quedó pendiente, si algo no se pudo hacer, y por qué.
