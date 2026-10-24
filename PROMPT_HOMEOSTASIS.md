@@ -1,5 +1,15 @@
 # HOMEOSTASIS: juego para aprender Bioquímica (módulo Lípidos)
 
+## Reglas para ahorrar uso (aplícalas durante todo el proyecto)
+1. Al empezar, guarda este prompt completo como PROMPT.md en el proyecto, y crea un CLAUDE.md corto (máximo 40 líneas) con estas reglas y un resumen del proyecto: qué es, qué archivos hay y en qué etapa vamos. No copies el prompt en CLAUDE.md: en cada sesión nueva, abre solo la sección de PROMPT.md que necesites para la etapa.
+2. Haz una etapa por sesión (sección 12). Al terminar cada una, actualiza PROGRESO.md y detente para que yo limpie la conversación.
+3. Lee los PDF una sola vez y pasa su contenido a CONTENIDO.md. Después trabaja solo con ese archivo.
+4. Para cambiar algo, edita solo la parte necesaria. No reescribas un archivo completo salvo que sea nuevo.
+5. No leas archivos largos completos: busca lo que necesitas y abre solo esa parte.
+6. No uses subagentes ni tareas en paralelo.
+7. Usa como máximo 2 capturas de pantalla por etapa. Para el resto, revisa los errores de consola y usa pruebas automáticas.
+8. Respuestas cortas: no me expliques el código ni repitas lo que hiciste. Al final de cada etapa, un resumen de 5 líneas como máximo.
+
 ## 0. Archivos que te adjunto
 1. HTML base: [NOMBRE DEL ARCHIVO]. Es mi app actual y la referencia de pestañas, funciones, colores y recursos.
 2. "Solemne de Biofísica": [NOMBRE DEL ARCHIVO]. Es la referencia del estilo de las explicaciones animadas (los "videos"). Ese es el estilo que quiero, pero todavía mejor.
@@ -17,11 +27,12 @@ Analiza el HTML base y hazme uno como ese, pero con la información de estos dos
 Si aprender y jugar chocan, gana aprender, pero busca la forma de que siga sintiéndose juego.
 
 ## 2. Antes de programar (obligatorio)
-1. Inventario del HTML base: todas las pestañas, funciones, botones, recursos, paleta de colores exacta (con códigos), tipografías, sonidos, animaciones, sistema de guardado y cualquier otro detalle. Guárdalo en INVENTARIO.md.
+1. Inventario del HTML base: todas las pestañas, funciones, botones, recursos, paleta de colores exacta (con códigos), tipografías, sonidos, animaciones, sistema de guardado y cualquier otro detalle. Guárdalo en INVENTARIO.md. Después de eso, no vuelvas a leer el HTML base completo: consulta INVENTARIO.md y abre solo la parte que necesites.
 2. Análisis de los videos de "Solemne de Biofísica": cómo están construidos (SVG, canvas, CSS o JS), su ritmo, sus transiciones, sus controles y cómo presentan cada paso. Anótalo en INVENTARIO.md. Ese es el estándar mínimo para todas las explicaciones nuevas.
-3. Lee los dos apuntes completos, incluidas todas las tablas, todas las figuras y todos los recuadros (Clave, Ojo, Clínica, Mnemotecnia, Diferencia y Síntesis). Arma la matriz de cobertura (sección 10) antes de crear contenido.
+3. Lee los dos apuntes completos una sola vez, incluidas todas las tablas, todas las figuras y todos los recuadros (Clave, Ojo, Clínica, Mnemotecnia, Diferencia y Síntesis). Pasa todo su contenido a CONTENIDO.md: el texto, las tablas, los recuadros y una descripción de cada figura. Desde ahí en adelante trabaja con CONTENIDO.md y no vuelvas a abrir los PDF.
+4. Arma la matriz de cobertura (sección 10) antes de crear contenido.
 
-No esperes mi confirmación: haz esto y sigue directo a construir.
+No esperes mi confirmación para empezar: esto es la etapa 1 de la sección 12.
 
 ## 3. Reglas que no se negocian
 - Nada del HTML base se pierde. Las pestañas y funciones pueden cambiar de nombre o de lugar para encajar en el juego, pero todas siguen existiendo y funcionando. Al final, entrega una tabla "pestaña o función original → dónde quedó".
@@ -30,7 +41,7 @@ No esperes mi confirmación: haz esto y sigue directo a construir.
 - La bioquímica es la mecánica: cada nivel exige saber algo del apunte para ganar. Está prohibido el "responde esta pregunta para desbloquear".
 - Los valores del apunte mandan: 2,5 ATP por NADH, 1,5 por FADH2, 10 ATP por acetil-CoA, y el palmitato rinde 108 ATP brutos y 106 netos. Cuando el apunte corrige una diapositiva (recuadros "Ojo"), usa la versión corregida y enséñala como trampa de examen.
 - Tiene que funcionar abriendo el archivo en el navegador, en celular y en PC, sin instalar nada y sin internet (las fuentes web son opcionales y deben tener respaldo).
-- Mantén el mismo formato de archivo del HTML base: si es un solo archivo, que siga siendo uno solo.
+- Durante el desarrollo, trabaja con varios archivos chicos (motor, estilos y un archivo de datos por capítulo) para poder editar solo lo necesario. Al final, júntalos con un script en un solo HTML (o en el mismo formato del HTML base), para que se abra igual que antes.
 
 ## 4. Dirección de arte (2D, nada de 3D)
 - Todo se dibuja en código con SVG (canvas solo para partículas si hace falta). Estilo plano, contornos gruesos, colores saturados y personajes redondos con ojos grandes, al estilo de Kurzgesagt y Cells at Work. Sin 3D, sin WebGL y sin imágenes externas.
@@ -428,22 +439,22 @@ Los capítulos mínimos son los siguientes. Cada uno debe cubrir todo lo que se 
 - Las figuras de los apuntes se recrean como esquemas o animaciones SVG propias (no se pegan como imagen), y cada una aparece en su capítulo.
 
 ## 11. Código preparado para más apuntes
-- Separa el motor del contenido. El contenido va en un bloque de datos claramente marcado, o en archivos de datos si el formato del HTML base lo permite, con un objeto por apunte. Cada objeto tiene: id, título, acto, color, capítulos (pasos del video, prácticas, recuadros, nivel y jefe), enzimas, moléculas, fármacos, enfermedades, preguntas, y nodos y conexiones del mapa (con compartimento, tejido y estado hormonal).
+- Separa el motor del contenido. El contenido va en archivos de datos separados del motor (un archivo por capítulo), agrupados por apunte. Cada apunte tiene: id, título, acto, color, capítulos (pasos del video, prácticas, recuadros, nivel y jefe), enzimas, moléculas, fármacos, enfermedades, preguntas, y nodos y conexiones del mapa (con compartimento, tejido y estado hormonal).
 - Un diccionario único de metabolitos con ID compartidos (acetil-CoA, malonil-CoA, citrato, HMG-CoA...), para que un apunte nuevo se conecte solo al mapa unificado.
 - El motor genera todo a partir de los datos: menús, videos, niveles, colecciones, mapa y exámenes. Agregar un apunte tiene que ser agregar un objeto, sin tocar el motor.
 - Guardado con versión, para que agregar temas no borre el progreso.
 - COMO_AGREGAR_APUNTES.md con la plantilla vacía y un ejemplo.
 
 ## 12. Forma de trabajo y verificación
-- Trabaja en etapas:
-  1. inventario y matriz de cobertura;
+- Trabaja en etapas, una por sesión:
+  1. inventario, CONTENIDO.md y matriz de cobertura;
   2. motor, estilo visual y mapa unificado;
   3. Acto I completo;
   4. Acto II completo;
   5. mecánicas transversales, jefes, colecciones y exámenes;
-  6. verificación final.
+  6. verificación final y unión de los archivos en el HTML final.
 
-  Verifica al final de cada etapa antes de seguir. No te detengas hasta completarlas todas.
+  Si una etapa es muy grande, divídela en partes (por ejemplo, Acto I capítulos 1 a 12 y 13 a 24). Al terminar cada etapa o parte: verifícala, actualiza PROGRESO.md (qué está hecho, qué falta y qué decisiones se tomaron) y detente para que yo limpie la conversación con /clear. Cada sesión nueva empieza leyendo CLAUDE.md y PROGRESO.md, no todo el proyecto.
 - Verificación final:
   - abre el juego en el navegador (con Playwright si está disponible) en tamaño celular y en tamaño PC;
   - no puede haber errores en la consola;
@@ -453,7 +464,7 @@ Los capítulos mínimos son los siguientes. Cada uno debe cubrir todo lo que se 
   - todos los números están recalculados;
   - la matriz no tiene filas vacías.
 - Entrega:
-  - los archivos del juego;
-  - INVENTARIO.md, COBERTURA.md y COMO_AGREGAR_APUNTES.md;
+  - los archivos del juego, el script que los une y el HTML final;
+  - CLAUDE.md, PROGRESO.md, INVENTARIO.md, CONTENIDO.md, COBERTURA.md y COMO_AGREGAR_APUNTES.md;
   - la tabla de conservación de pestañas;
   - un resumen de lo que hiciste y, si algo no se pudo hacer, qué quedó pendiente y por qué.
