@@ -29,7 +29,14 @@ Si aprender y jugar chocan, gana aprender, pero busca la forma de que siga sinti
 ## 2. Antes de programar (obligatorio)
 1. Inventario del HTML base: todas las pestañas, funciones, botones, recursos, paleta de colores exacta (con códigos), tipografías, sonidos, animaciones, sistema de guardado y cualquier otro detalle. Guárdalo en INVENTARIO.md. Después de eso, no vuelvas a leer el HTML base completo: consulta INVENTARIO.md y abre solo la parte que necesites.
 2. Análisis de los videos de "Solemne de Biofísica": cómo están construidos (SVG, canvas, CSS o JS), su ritmo, sus transiciones, sus controles y cómo presentan cada paso. Anótalo en INVENTARIO.md. Ese es el estándar mínimo para todas las explicaciones nuevas.
-3. Lee los dos apuntes completos una sola vez, incluidas todas las tablas, todas las figuras y todos los recuadros (Clave, Ojo, Clínica, Mnemotecnia, Diferencia y Síntesis). Pasa todo su contenido a CONTENIDO.md: el texto, las tablas, los recuadros y una descripción de cada figura. Desde ahí en adelante trabaja con CONTENIDO.md y no vuelvas a abrir los PDF.
+3. Pasa los dos apuntes a CONTENIDO.md una sola vez, sin omitir nada (texto, tablas, figuras y los recuadros Clave, Ojo, Clínica, Mnemotecnia, Diferencia y Síntesis):
+   - extrae el texto con una herramienta (pdftotext o PyMuPDF) en vez de leer las páginas como imagen. Los apuntes están a dos columnas: revisa que el texto no quede mezclado y que las tablas queden completas;
+   - extrae las figuras a la carpeta figuras/, con nombres como A-fig01.png o B-fig27.png;
+   - mira cada figura una sola vez y escribe en CONTENIDO.md, junto a su sección, una descripción detallada: moléculas, enzimas, flechas, signos de activación e inhibición, números y anotaciones a mano. Hay datos que están solo en las figuras, así que esa descripción es obligatoria;
+   - marca qué figuras son fotos reales (histología, micrografías, animales, estructuras 3D) y cuáles son esquemas;
+   - si te paso los apuntes en Word (.docx) además del PDF, usa el Word: trae el texto, las tablas y las imágenes ya separados.
+
+   Desde ahí en adelante trabaja con CONTENIDO.md y no vuelvas a abrir los PDF.
 4. Arma la matriz de cobertura (sección 10) antes de crear contenido.
 
 No esperes mi confirmación para empezar: esto es la etapa 1 de la sección 12.
@@ -44,7 +51,7 @@ No esperes mi confirmación para empezar: esto es la etapa 1 de la sección 12.
 - Durante el desarrollo, trabaja con varios archivos chicos (motor, estilos y un archivo de datos por capítulo) para poder editar solo lo necesario. Al final, júntalos con un script en un solo HTML (o en el mismo formato del HTML base), para que se abra igual que antes.
 
 ## 4. Dirección de arte (2D, nada de 3D)
-- Todo se dibuja en código con SVG (canvas solo para partículas si hace falta). Estilo plano, contornos gruesos, colores saturados y personajes redondos con ojos grandes, al estilo de Kurzgesagt y Cells at Work. Sin 3D, sin WebGL y sin imágenes externas.
+- Todo se dibuja en código con SVG (canvas solo para partículas si hace falta). Estilo plano, contornos gruesos, colores saturados y personajes redondos con ojos grandes, al estilo de Kurzgesagt y Cells at Work. Sin 3D, sin WebGL y sin imágenes de internet: las únicas imágenes son las fotos reales de los apuntes (sección 10).
 - Toques retro de videojuego: tipografía pixel en títulos y HUD (por ejemplo Press Start 2P o VT323, con fuente de respaldo), marcos de HUD gruesos y efectos de sonido chiptune generados con Web Audio API (sin archivos de audio), con botón para silenciar.
 - Moléculas precisas: cadenas con los carbonos numerados (C1 del carboxilo, α, β, ω), dobles enlaces cis o trans en su posición real (Δ2, Δ3, Δ9, Δ12...), los anillos A-B-C-D del colesterol y el enlace tioéster con la CoA.
 - Mascota guía: "Mito", una mitocondria sarcástica (con forma de frijol, color naranja-rosado y crestas en zigzag) que narra las explicaciones y reacciona a los aciertos y errores.
@@ -436,7 +443,7 @@ Los capítulos mínimos son los siguientes. Cada uno debe cubrir todo lo que se 
 ## 10. Matriz de cobertura (control de que no falte nada)
 - COBERTURA.md tiene una fila por cada sección y subsección de los dos apuntes (A 1.1 a A 24, B 1.1 a B 24), por cada tabla, por cada figura y por cada recuadro. Columnas: ítem, capítulo, paso del video, mecánica o nivel, y preguntas (con sus ID). Ninguna fila puede quedar vacía.
 - Banco de preguntas: por cada ítem de la matriz, al menos una verdadero/falso con justificación y una de otro formato (selección múltiple, ordenar, arrastrar o completar). También preguntas inversas (dado el efecto, encontrar la causa) y de cálculo donde aplique.
-- Las figuras de los apuntes se recrean como esquemas o animaciones SVG propias (no se pegan como imagen), y cada una aparece en su capítulo.
+- Los esquemas de los apuntes se redibujan como esquemas o animaciones SVG propias, a partir de su descripción en CONTENIDO.md. Las fotos reales (histología, micrografías, animales, estructuras 3D) se muestran desde figuras/, comprimidas, con un botón "ver figura original". Cada figura aparece en su capítulo.
 
 ## 11. Código preparado para más apuntes
 - Separa el motor del contenido. El contenido va en archivos de datos separados del motor (un archivo por capítulo), agrupados por apunte. Cada apunte tiene: id, título, acto, color, capítulos (pasos del video, prácticas, recuadros, nivel y jefe), enzimas, moléculas, fármacos, enfermedades, preguntas, y nodos y conexiones del mapa (con compartimento, tejido y estado hormonal).
