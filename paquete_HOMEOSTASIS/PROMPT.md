@@ -467,6 +467,7 @@ Al terminar cada etapa: corre el validador, revisa que no haya errores de consol
 - El Acto I completo en el Modo Historia (I-1 a I-24): cada capítulo con su video, la práctica dentro del video, los recuadros como objetos del juego, su Modo Exprés y su banco de preguntas. Por ahora, el paso "nivel jugable" es un desafío de preguntas con tiempo y vidas, que hace de mini-jefe.
 - El mapa unificado en su primera versión: el tramo del Acto I navegable, con niebla de guerra e interruptor hormonal.
 - HOMEOSTASIS.html listo para usar.
+- Punto de control: cuando el motor esté listo y el capítulo I-1 esté completo (video, práctica, recuadros, Modo Exprés y preguntas), detente y avísame para que cambie de modelo. El capítulo I-1 es el modelo de calidad: todos los capítulos siguientes (en esta etapa y en la 2) siguen su misma estructura y nivel de detalle.
 
 ### Etapa 2: "Ya puedo estudiar todo"
 - El Acto II completo en el Modo Historia (II-1 a II-26), con la misma estructura.
@@ -476,6 +477,7 @@ Al terminar cada etapa: corre el validador, revisa que no haya errores de consol
 
 ### Etapa 3: "El juego completo"
 - Las mecánicas de la sección 7 como motores genéricos, con un nivel para cada capítulo, en reemplazo de los desafíos de preguntas provisionales.
+- Punto de control: cuando los motores de las mecánicas estén listos y haya un nivel terminado de cada una, detente y avísame para que cambie de modelo. Esos niveles son el modelo de calidad para los demás.
 - Los mini-jefes y jefes de la sección 8, la progresión (XP, rangos, logros y racha), el sonido y los efectos.
 - COMO_AGREGAR_APUNTES.md.
 - Verificación final:
